@@ -1,0 +1,25 @@
+<fieldset id="contenido" >
+  <legend id="leyendaindex">
+    Verificar Usuario
+  </legend>
+<% form_for(@usuario) do |f| %>
+  <%= f.error_messages %>
+  <table  frame="box" width="580">
+    <tr>
+      <td>
+        <%= link_to image_tag("Select.gif", :mouseover => "Selectmo.gif", :border => 0 ), edit_usuario_path(@usuario) %>
+        <%= link_to image_tag("Cancel.gif", :mouseover => "Cancelmo.gif", :border => 0), usuarios_path %>
+      </td>
+    </tr> 
+  </table> 
+  <br /> 
+  <table>
+    <col width="200px"/><col width="205px"/>
+    <tr> <td>Usuario codigo </td> <td><%= @usuario.codigo %></td> </tr>
+    <tr> <td>Usuario nombre </td> <td><%= @usuario.nombre %></td> </tr>
+    <tr> <td>Estado </td> <td><%= @usuario.estatus %></td> </tr>
+    <tr> <td>Categoria </td> <td><%= @usuario.categoria.codigo %>:    <%= @usuario.categoria.nombre %></td> </tr>
+    
+  </table>
+<% end %>
+</fieldset>

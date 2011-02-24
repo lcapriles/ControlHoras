@@ -1,0 +1,13 @@
+<table>
+  <% fields_for @cliente do |f| %>
+    <tr><td>Código Cliente:</td><td><%= f.text_field :codigo, :maxlength => 6, :size =>6 %></td></tr>
+    <tr><td>Nombre Cliente:</td><td><%= f.text_field :nombre, :size =>60, :maxlength => 60 %></td></tr>
+    <tr><td>Nombre Completo:</td><td><%= f.text_field :nombre_completo, :size =>60, :maxlength => 60 %></td></tr>
+    <tr><td>Idioma:</td><td><%= f.text_field :idioma, :size =>3, :maxlength => 60 %></td></tr>
+    <tr><td>Logo:</td>
+        <td><%= f.file_field :logo %>
+            <img src="<%= url_for(:action => 'display_logo', :id => @cliente.id) %>" width="150" height="100" /></td>
+    </tr>
+    <tr><td></td><td><%= f.hidden_field :suscriptor_id %></td></tr>
+  <% end %>
+</table>

@@ -1,0 +1,127 @@
+= 2dcJqgrid
+
+This Rails plugin allows you to add jQuery datagrids into your applications.
+
+Following features are supported :
+
+- Ajax enabled
+- Sorting
+- Pagination
+- Search
+- CRUD operations (add, edit, delete)
+- Multi-selection (checkboxes)
+- Master-details
+- Themes
+- And more ...
+
+Documentation & live demo are available at http://www.2dconcept.com/jquery-grid-rails-plugin
+A sample app is available here : http://github.com/ahe/jqgrid_demo_app
+
+Copyright (c) 2009 Anthony Heukmes, released under the MIT license
+
+My Rails blog : http://2dconcept.com
+My Twitter account : http://twitter.com/2dc
+
+
+= Generator
+
+You can now generate a grid using a command like this one :
+
+  $ ./script/generate jqgrid user id pseudo email firstname
+
+
+= Restful Buttons Example
+
+Add error/validation notification helper method to ApplicationController (or specific controllers).
+You can then call jqgrid_error_messages_for(@widget) from your controllers.
+
+  class ApplicationController < ActionController::Base
+      ...
+    include JqgridNotifiable
+      ...
+  end
+
+Example create method from controller - Note the type json needed for :custom_buttons helper
+
+  def create
+    respond_to do |type|
+      type.html {
+        params[:widget] ||= {}
+        @widget = Widget.new(params[:widget])
+        if @widget.save
+          flash[:notice] = "Successfully created widget."
+          redirect_to @widget
+        else
+          render :action => 'new'
+        end
+        }
+  
+      type.json {
+        widget_params = {
+                            :description => params[:description],
+                            :amount => params[:amount],
+                          }
+        @widget=Widget.new(widget_params)
+        if @widget.save
+          render :json => [true,""]  # use this syntax to pass back messages to jqgrid
+        else
+  
+          #Used to pass error/validation messages to a modal form. Need to include JqgridNotifiable in ApplicationController.
+          jqgrid_error_messages_for(@widget) 
+  
+        end  
+        }
+    end
+  end
+
+View
+
+  <%= jqgrid_restful_add_edit_delete_buttons(
+    :name => "widgets",
+    :div_object => "widgets", 
+    :base_path => widgets_path
+  ) %>
+  
+  <%= jqgrid("Widgets for this Plan", "widgets", client_plan_widgets_path(@client, @plan),
+    [
+      { :field => "id", :label => "ID", :resizable => false, :hidden => true },
+      { :field => "description", :label => "Description" },
+      { :field => "amount", :label => "Amount", :formatter => 'currency',
+        :formatoptions => { :decimalSeparator=>".", :thousandsSeparator=>",", :decimalPlaces=>0, :prefix=>"$"} }
+    ],
+  
+    { :add => false, :edit => false, :inline_edit => false, :delete => false, :search => false, :width => 650,
+  
+      :custom_buttons => [  {
+  							:function_name => 'addWidget',
+  							:caption => nil,
+  							:title => "Add Widget", 
+       						:icon => "ui-icon-plusthick",
+  							},
+  							{
+  							:function_name => 'editWidget',
+  							:caption => nil,
+  							:title => "Edit Selected Widget", 
+       						:icon => "ui-icon-pencil",
+  							},
+  							{
+  							:function_name => 'deleteWidget',
+  							:caption => nil,
+  							:title => "Delete Selected Widget", 
+       						:icon => "ui-icon-trash",
+  							}
+                         ]
+    }
+  ) %>
+
+Or, if you want to override the default add/edit/delete functions with your own
+
+  <%= jqgrid_restful_add_edit_delete_buttons(
+    :name => "widgets",
+    :div_object => "widgets", 
+    :base_path => widgets_path,
+    :add_function => %Q(document.location='#{ new_widget_path }';),
+    :edit_function => %Q(document.location='#{ widgets_path }/' + id.toString() + '/edit';)
+  ) %>
+
+

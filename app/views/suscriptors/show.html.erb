@@ -1,0 +1,22 @@
+<fieldset id="contenido" >
+  <legend id="leyendaindex">
+    Verificar Suscriptor
+  </legend>
+<% form_for(@suscriptor) do |f| %>
+  <%= f.error_messages %>
+  <table  frame = "box" width = "580">
+    <tr>
+      <td>
+        <%= link_to image_tag("Select.gif", :mouseover => "Selectmo.gif", :border => 0 ), edit_suscriptor_path(@suscriptor) %>
+        <%= link_to image_tag("Cancel.gif", :mouseover => "Cancelmo.gif", :border => 0), suscriptors_path %>
+      </td>
+    </tr> 
+  </table> 
+  <br /> 
+  <table>
+    <col width="200px"/><col width="205px"/>
+    <tr> <td>Cliente codigo </td> <td><%= @suscriptor.codigo %></td> </tr>
+    <tr> <td>Cliente nombre </td> <td><%= @suscriptor.nombre %></td> </tr>
+  </table>
+<% end %>
+</fieldset>

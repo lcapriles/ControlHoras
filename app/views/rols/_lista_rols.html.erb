@@ -1,0 +1,41 @@
+<table class="tope">
+  <col width="80"/>
+  <col width="470"/>
+  <tr>
+    <th <%= sort_td_class_helper "codigo" %>> <%= sort_link_helper "Código", "codigo" %> </th>
+    <th <%= sort_td_class_helper "nombre" %>> <%= sort_link_helper "Nombre", "nombre" %> </th>
+  </tr>
+</table>
+
+  <% form_tag(rols_path, :method => "get") do %>
+    <table class="qbe">
+      <col width="80"/>
+      <col width="470"/>
+      <tr>
+        <td align=left><%= text_field_tag :codigo, @qbe_key[:codigo], options={ :size=> 10 } %></td>
+        <td align=left><%= text_field_tag :nombre, @qbe_key[:nombre], options={ :size=> 30 } %></td>
+        <td><%= image_submit_tag "Find.gif", :id => "BotonFind1" %></td>
+      </tr>
+    </table>
+  <% end %>
+
+<table class="lista">
+  <col width="80"/>
+  <col width="470px"/>
+  <% @rols.each do |rol| -%>
+    <tr class="<%= cycle("Impar","Par") %>">
+      <td><%= rol.codigo %></td>
+      <td><%= rol.nombre %></td>
+      <td><%= link_to image_tag("modetail.gif", :mouseover => "modetailmo.gif", :border => 0), rol %>
+          <%= link_to image_tag("Select.gif", :mouseover => "Selectmo.gif", :border => 0), edit_rol_path(rol) %>
+          <%= link_to image_tag("Delete.gif", :mouseover => "Deletemo.gif", :border => 0), rol, :confirm => 'Confirma la operacion?', :method => :delete %></td>
+    </tr>
+  <% end -%>
+</table>
+<br />
+<div class="paginacion">
+  <div class="info_paginas" >
+    <%= page_entries_info @rols %>
+  </div>
+  <%= will_paginate @rols  %>
+</div>

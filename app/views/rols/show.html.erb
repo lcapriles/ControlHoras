@@ -1,0 +1,22 @@
+<fieldset id="contenido" >
+  <legend id="leyendaindex">
+    Verificar Rol
+  </legend>
+<% form_for(@rol) do |f| %>
+  <%= f.error_messages %>
+  <table  frame = "box" width = "500">
+    <tr>
+      <td>
+        <%= link_to image_tag("Select.gif", :mouseover => "Selectmo.gif", :border => 0 ), edit_rol_path(@rol) %>
+        <%= link_to image_tag("Cancel.gif", :mouseover => "Cancelmo.gif", :border => 0), rols_path %>
+      </td>
+    </tr> 
+  </table> 
+  <br /> 
+  <table>
+    <col width="200px"/><col width="205px"/>
+    <tr> <td>Código </td> <td><%= @rol.codigo %></td> </tr>
+    <tr> <td>Nombre </td> <td><%= @rol.nombre %></td> </tr>
+  </table>
+<% end %>
+</fieldset>

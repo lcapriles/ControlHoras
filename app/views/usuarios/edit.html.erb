@@ -1,0 +1,49 @@
+<fieldset id="contenido" >
+  <legend id="leyendaindex">
+    Editar Usuario
+  </legend>
+  <% form_for @usuario do |f| %>
+    <%= f.error_messages %>
+    <table  frame="box" width="580">
+      <tr>
+        <td>
+          <%= image_submit_tag "OK.gif",{ :id => "BotonOK1",
+            :onclick => "$('rol_selec_buffer').value = '';
+    for (var i = 0; i < form_rols_selec.elements.length; i++ ) {
+      if (form_rols_selec.elements[i].type == 'checkbox') {
+        if (form_rols_selec.elements[i].checked == false) {
+          $('rols_buffer').value = $('rols_buffer').value  + form_rols_selec.elements[i].value + ', ';
+        }
+      }
+    }"} %>
+          <%= link_to image_tag("Cancel.gif", :mouseover => "Cancelmo.gif", :border => 0), usuarios_path %>
+        </td>
+      </tr>
+    </table>
+
+    <input type="hidden" id="rols_buffer" name="rols_buffer" />
+
+    <ol id="toc">
+      <li><a href="#page-1" onclick ="setTabs('1','2');">
+          <span id="link-1"  style="font-weight:bold;" >Usuarios</span></a></li>
+      <li><a href="#page-2" onclick ="setTabs('2','1');">
+          <span id="link-2" >Roles</span></a></li>
+    </ol>
+    <div class="content" id="page-1">
+      <%= render :partial => "ficha" %>
+    </div>
+  <% end %>
+  <div class="content" id="page-2" style="display:none;">
+    <%= render :partial => "usuario_rol" %>
+  </div>
+</fieldset>
+
+<script type="text/javascript" language="javascript">
+  function setTabs(t1,t2){//Funcion para resaltar tab seleccionado...
+    document.getElementById('page-' + t1).style.display='block';
+    document.getElementById('page-' + t2).style.display='none';
+    document.getElementById('link-' + t1).style.fontWeight='bold';
+    document.getElementById('link-' + t2).style.fontWeight='normal';
+  }
+</script>
+

@@ -1,0 +1,12 @@
+<% form_tag do %>
+  <fieldset>
+    <legend>Ingrese sus credenciales</legend>
+    <table>
+      <col width=85px/><col width=85px/>
+      <tr><td>Login</td><td><%= text_field_tag :login, params[:login] %></td></tr>
+      <tr><td>Password</td><td><%= password_field_tag :password, params[:password] %></td></tr>
+    </table>
+    <br/>  
+  </fieldset>
+<%= submit_tag "Login" %>
+<% end %>

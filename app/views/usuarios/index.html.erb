@@ -1,0 +1,18 @@
+<fieldset id="contenido" >
+  <legend id="leyendaindex">
+    Tabla de Usuarios
+  </legend>
+  <table class="botonera" frame = "box" width = "580">
+    <tr>
+      <td>
+        <%= link_to image_tag("Add.gif", :mouseover => "Addmo.gif", :border => 0), new_usuario_path %>
+        <%= link_to image_tag("Cancel.gif", :mouseover => "Cancelmo.gif", :border => 0), "admin/entrada" %> 
+      </td>
+    </tr>
+  </table>
+  <br />
+
+  <div id="lista">
+    <%= render :partial => "lista" %>
+  </div>
+</fieldset>

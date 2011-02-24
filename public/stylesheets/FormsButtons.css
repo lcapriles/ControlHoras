@@ -1,0 +1,37 @@
+#BotonBlank  {
+	background-color:none;
+	border:none;
+}
+
+input, button, tr, td  {
+	behavior: url("/stylesheets/IEpseudo-class.htc");
+}
+
+#BotonFind1   {
+	background-color:none;
+	border:none;
+}
+
+#BotonFind1:hover, #BotonFind1.hover  {
+	background-image:url("/images/Findmo.gif");
+	background-repeat:no-repeat;
+	background-position:top center;
+	cursor: pointer; /* hand-shaped cursor */
+	cursor: hand; /* for IE 5.x */
+}
+
+#BotonOK1:hover, 	#BotonOK1.hover {
+	background-image:url("/images/OKmo.gif");
+	background-repeat:no-repeat;
+	background-position:top center;
+	cursor: pointer; /* hand-shaped cursor */
+	cursor: hand; /* for IE 5.x */
+}
+
+#BotonAdd1:hover, 	#BotonAdd1.hover {
+	background-image:url("/images/Addmo.gif");
+	background-repeat:no-repeat;
+	background-position:top center;
+	cursor: pointer; /* hand-shaped cursor */
+	cursor: hand; /* for IE 5.x */
+}

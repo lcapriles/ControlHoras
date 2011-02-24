@@ -1,0 +1,28 @@
+<table>
+  <col width="80px"/>
+  <col width="200px"/>
+  <% fields_for @proyecto do |f| %>
+    <tr><td>Codigo </td><td><%= f.text_field :codigo, :size =>8 %></td></tr>
+    <tr><td>Nombre </td><td><%= f.text_field :nombre, :size =>65 %></td></tr>
+    <tr><td>Descripcion </td><td><%= f.text_area :descripcion, :rows => 3, :size =>0 %></td></tr>
+    <tr><td>Estatus </td><td><%= f.text_field :estatus, :size =>3 %></td></tr>
+    <tr><td> Fecha Inicio Original </td>
+        <td><%= f.calendar_date_select :fecha_inicio_original, :size=> 12, :popup => "force" %></td></tr>
+    <tr><td> Fecha Inicio Actual </td>
+        <td><%= f.calendar_date_select :fecha_inicio_actual, :size=> 12, :popup => "force" %></td></tr>
+    <tr><td> Fecha Inicio Real </td>
+        <td><%= f.calendar_date_select :fecha_inicio_real, :size=> 12, :popup => "force" %></td></tr>
+    <tr><td> Fecha Fin Original </td>
+        <td><%= f.calendar_date_select :fecha_fin_original, :size=> 12, :popup => "force" %></td></tr>
+    <tr><td> Fecha Fin Actual </td>
+        <td><%= f.calendar_date_select :fecha_fin_actual, :size=> 12, :popup => "force" %></td></tr>
+    <tr><td> Fecha Fin Real </td>
+        <td><%= f.calendar_date_select :fecha_fin_real, :size=> 12, :popup => "force" %></td></tr>
+    <tr><td>Cliente </td>
+        <td><%=select("proyecto", "cliente_id", 
+                      Cliente.find(:all,:conditions => "suscriptor_id = " + session[:suscriptor_id].to_s).collect {|p| [ p.nombre, p.id ] }, { :include_blank => true }) %></td>
+    </tr>
+    <tr><td></td><td><%= f.hidden_field :suscriptor_id %></td></tr>
+  <% end %>
+</table>
+

@@ -1,0 +1,63 @@
+<table  frame="box" width="600">
+    <tr>
+      <td>
+        <h3>Roles Disponibles </h3>
+        <%= render :partial => "rol_disp"%>
+        <br />
+      </td>
+      <td> <%= link_to_remote image_tag("MoveRight.gif", :mouseover => "MoveRightMO.gif", :border => 0),
+          :method => 'get', :url => {:action => "usuario_rol_selec"},
+          :before => "$('rol_disp_buffer').value = '';
+                      for (var i = 0; i < form_rols_disp.elements.length; i++ ) {//Nos llevamos todos los marcados disponibles
+                        if (form_rols_disp.elements[i].type == 'checkbox') {
+                          if (form_rols_disp.elements[i].checked == true) {
+                            $('rol_disp_buffer').value = $('rol_disp_buffer').value + '&' +
+                                                    form_rols_disp.elements[i].name + '=' + form_rols_disp.elements[i].value;
+                          }
+                        }
+                      };
+                      for (var i = 0; i < form_rols_selec.elements.length; i++ ) {//Los previamente seleccioandos se quedan...
+                        if (form_rols_selec.elements[i].type == 'checkbox') {
+                          $('rol_disp_buffer').value = $('rol_disp_buffer').value + '&' +
+                                                    form_rols_selec.elements[i].name + '=' + form_rols_selec.elements[i].value;
+                        }
+                      }",
+          :after => "document.getElementById('BotonRefreshDisp').click();",
+          :with => "'?' + $('rol_disp_buffer').value",
+          :update => "div_rols_selec" %>
+        <%= link_to_remote image_tag("MoveLeft.gif", :mouseover => "MoveLeftMO.gif", :border => 0),
+          :method => 'get', :url => {:action => "usuario_rol_disp"},
+          :before => "$('rol_selec_buffer').value = '';
+                      for (var i = 0; i < form_rols_selec.elements.length; i++ ) {
+                        if (form_rols_selec.elements[i].type == 'checkbox') {
+                          if (form_rols_selec.elements[i].checked == false) {
+                            $('rol_selec_buffer').value = $('rol_selec_buffer').value + '&' +
+                                                    form_rols_selec.elements[i].name + '=' + form_rols_selec.elements[i].value;
+                          }
+                        }
+                      }",
+          :after => "document.getElementById('BotonRefreshSelec').click();",
+          :with => "'?' + $('rol_selec_buffer').value",
+          :update => "div_rols_disp" %>
+        <%= button_to_remote  "BotonRefreshDisp",{
+          :method => 'get', :url => {:action => "usuario_rol_disp"},
+          :with => "'?' + $('rol_disp_buffer').value",
+          :update => "div_rols_disp"
+          },{
+          :name => "BotonRefreshDisp", :id => "BotonRefreshDisp", :style => "display:none"
+        }%>
+        <%= button_to_remote  "BotonRefreshSelec",{
+          :method => 'get', :url => {:action => "usuario_rol_selec"},
+          :with => "'?' + $('rol_selec_buffer').value",
+          :update => "div_rols_selec"
+          },{
+          :name => "BotonRefreshSelec", :id => "BotonRefreshSelec", :style => "display:none"
+        }%>
+      </td>
+      <td>
+        <h3>Roles Asignados</h3>
+        <br />
+        <%= render :partial => "rol_selec" %>
+      </td>
+    </tr>
+</table>

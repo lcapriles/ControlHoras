@@ -1,0 +1,20 @@
+<fieldset id="contenido" >
+  <legend id="leyendaindex">
+    Editar Proyecto
+  </legend>
+  <% form_for(@proyecto) do |f| %>
+    <%= f.error_messages %>
+    <table  frame = "box", width = "500">
+            <tr>
+        <td>
+          <%= image_submit_tag "OK.gif", :id => "BotonOK1" %>
+          <%= link_to image_tag("Cancel.gif", :mouseover => "Cancelmo.gif", :border => 0), proyectos_path %>
+        </td>
+      </tr>
+    </table>
+    <br />
+    <table>
+      <%= render :partial => "ficha" %>
+    </table>
+  <% end %>
+</fieldset>

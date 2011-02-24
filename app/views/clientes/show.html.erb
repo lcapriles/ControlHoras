@@ -1,0 +1,22 @@
+<fieldset id="contenido" >
+  <legend id="leyendaindex">
+    Verificar Cliente
+  </legend>
+<% form_for(@cliente) do |f| %>
+  <%= f.error_messages %>
+  <table  frame = "box", width = "500">
+    <tr>
+      <td>
+        <%= link_to image_tag("Select.gif", :mouseover => "Selectmo.gif", :border => 0 ), edit_cliente_path(@cliente) %>
+        <%= link_to image_tag("Cancel.gif", :mouseover => "Cancelmo.gif", :border => 0), clientes_path %>
+      </td>
+    </tr> 
+  </table> 
+  <br /> 
+  <table>
+    <col width="200px"/><col width="205px"/>
+    <tr> <td>Cliente codigo </td> <td><%= @cliente.codigo %></td> </tr>
+    <tr> <td>Cliente nombre </td> <td><%= @cliente.nombre %></td> </tr>
+  </table>
+<% end %>
+</fieldset>

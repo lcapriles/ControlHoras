@@ -1,0 +1,2 @@
+class EntradaController < ApplicationController
+end

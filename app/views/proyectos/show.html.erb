@@ -1,0 +1,23 @@
+<h1>Verificar Proyecto</h1>
+<% form_for(@proyecto) do |f| %>
+  <%= f.error_messages %>
+  <table  frame = "box" width = "500">
+    <tr>
+      <td>
+        <%= link_to image_tag("Select.gif", :mouseover => "Selectmo.gif", :border => 0 ), edit_proyecto_path(@proyecto) %>
+        <%= link_to image_tag("Cancel.gif", :mouseover => "Cancelmo.gif", :border => 0), proyectos_path %>
+      </td>
+    </tr> 
+  </table> 
+  <br /> 
+  <table> 
+    <tr> <td width=150, align=left>Codigo </td> <td><%= @proyecto.codigo %></td> </tr>
+    <tr> <td width=150, align=left>Nombre </td> <td><%= @proyecto.nombre %></td> </tr>
+    <tr> <td width=150, align=left>Descripcion </td> <td><%= @proyecto.descripcion %></td> </tr>
+    <tr> <td width=150, align=left>Fecini </td> <td><%= @proyecto.fecini %></td> </tr>
+    <tr> <td width=150, align=left>Fecfin </td> <td><%= @proyecto.fecfin %></td> </tr>
+    <tr> <td width=150, align=left>Estatus </td> <td><%= @proyecto.estatus %></td> </tr>
+    <tr> <td width=150, align=left>Cliente </td> <td><%= @proyecto.cliente_id %></td> </tr>
+    <tr> <td width=150, align=left>Moneda </td> <td><%= @proyecto.moneda_id %></td> </tr>
+  </table>
+<% end %>

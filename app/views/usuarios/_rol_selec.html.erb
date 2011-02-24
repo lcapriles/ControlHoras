@@ -1,0 +1,24 @@
+<div class="div_rols_selec" id="div_rols_selec" style="overflow: auto; height: 150px">
+
+<% form_tag("/usuarios/usuario_rol_selec", :method => "get", :name => "form_rols_selec") do %>
+<input type="hidden" id="rol_selec_buffer" name="rol_selec_buffer" />
+
+<table>
+<col width="15px"/><col width="40px"/><col width="80px"/>
+  <tr>
+    <th>    </th>
+    <th>Rol Codigo</th>
+    <th>Rol Nombre</th>
+  </tr>
+  <% for rol in @rols_selec -%>
+    <tr class="<%= cycle("Impar","Par") %>" id="tr_rols_selec_<%= rol.id %>">
+      <td><%= check_box_tag "rol_id_#{rol.id}", rol.id, false %></td>
+      <td><%= rol.codigo %></td>
+      <td><%= rol.nombre %></td>
+    </tr>
+  <% end -%>
+</table>
+
+<% end %>
+
+</div>

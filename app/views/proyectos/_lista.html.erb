@@ -1,0 +1,59 @@
+<table class="tope">
+  <col width="60"/>
+  <col width="470"/>
+  <col width="60"/>
+  <col width="60"/>
+  <col width="80"/>
+  <tr>
+    <th <%= sort_td_class_helper "codigo" %>> <%= sort_link_helper "Código", "codigo" %> </th>
+    <th <%= sort_td_class_helper "nombre" %>> <%= sort_link_helper "Nombre", "nombre" %> </th>
+    <th>Cliente</th>
+    <th>Estatus</th>
+  </tr>
+</table>
+
+  <% form_tag(proyectos_path, :method => "get") do %>
+    <table class="qbe">
+      <col width="60"/>
+      <col width="500"/>
+      <col width="80"/>
+      <col width="80"/>
+      <col width="80"/>
+      <tr>
+        <td align=left><%= text_field_tag :codigo, @qbe_key[:codigo],:maxlength => 6, :size =>4 %></td>
+        <td align=left><%= text_field_tag :nombre, @qbe_key[:nombre], :maxlength => 45, :size =>70 %></td>
+        <td align=left><%= text_field_tag :cliente_id, @qbe_key[:cliente_id], :maxlength => 10, :size =>6 %></td>
+        <td align=left><%= text_field_tag :estatus, @qbe_key[:estatus], :maxlength => 3, :size =>4 %></td>
+        <td><%= image_submit_tag "Find.gif", :id => "BotonFind1" %></td>
+      </tr>
+    </table>
+  <% end %>
+
+<table class="lista">
+  <col width="60"/>
+  <col width="470px"/>
+  <col width="60"/>
+  <col width="60"/>
+  <col width="80"/>
+  <% @proyectos.each do |proyecto| %>
+    <tr class="<%= cycle("Impar","Par") %>">
+      <td><%= proyecto.codigo %></td>
+      <td><%= proyecto.nombre %></td>
+      <td><%= proyecto.cliente.codigo %></td>
+      <td><%= proyecto.estatus %></td>
+      <td><%= link_to image_tag("modetail.gif", :mouseover => "modetailmo.gif", :border => 0), proyecto %>
+          <%= link_to image_tag("Select.gif", :mouseover => "Selectmo.gif", :border => 0), edit_proyecto_path(proyecto) %>
+          <%= link_to image_tag("Delete.gif", :mouseover => "Deletemo.gif", :border => 0), proyecto, :confirm => 'Confirma la operacion?', :method => :delete %></td>
+    </tr>
+  <% end -%>
+</table>
+
+<br />
+<div class="paginacion">
+  <div class="info_paginas" >
+    <%= page_entries_info @proyectos %>
+  </div>
+  <%= will_paginate @proyectos  %>
+</div>
+
+

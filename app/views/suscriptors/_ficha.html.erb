@@ -1,0 +1,9 @@
+<table>
+  <% fields_for @suscriptor do |f| %>
+    <tr><td>Código Suscriptor</td><td><%= f.text_field :codigo, :maxlength => 6, :size =>6 %></td></tr>
+    <tr><td>Nombre Suscriptor:</td><td><%= f.text_field :nombre, :size =>60, :maxlength => 60 %></td></tr>
+    <tr><td>Logo:</td>
+        <td><%= f.file_field :logo %> <img src="<%= url_for(:action => 'display_logo', :id => @suscriptor.id) %>" width="150" height="100" /> </td>
+    </tr>
+  <% end %>
+</table>

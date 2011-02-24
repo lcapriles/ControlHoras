@@ -1,0 +1,7 @@
+<table>
+  <% fields_for @rol do |f| %>
+    <tr><td>Código Rol:</td><td><%= f.text_field :codigo, :maxlength => 6, :size =>6 %></td></tr>
+    <tr><td>Nombre Rol:</td><td><%= f.text_field :nombre, :size =>70, :maxlength => 60 %></td></tr>
+  <% end %>
+</table>
+
